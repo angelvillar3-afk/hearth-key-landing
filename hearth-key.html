@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hearth & Key | Control Parental y Desafíos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Nueva Paleta de Colores Extraída de la Imagen */
+        :root {
+            --verde-salvia: #99B898;
+            --durazno-claro: #FECEAB;
+            --salmon: #FF847C;
+            --rojo-rosa: #E84A5F;
+            --carbon-oscuro: #2A363B;
+            --blanco-puro: #FFFFFF;
+            --fondo-gris: #F9F9F9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--fondo-gris);
+            color: var(--carbon-oscuro);
+            line-height: 1.6;
+        }
+
+        /* --- Header y Navegación --- */
+        header {
+            background-color: var(--blanco-puro);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--carbon-oscuro);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--rojo-rosa); }
+
+        .btn-cta {
+            background-color: var(--rojo-rosa);
+            color: var(--blanco-puro);
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--rojo-rosa);
+            position: relative; /* Necesario para la alerta */
+        }
+
+        .btn-cta:hover {
+            background-color: transparent;
+            color: var(--rojo-rosa);
+        }
+
+        /* --- ANIMACIÓN DE ALERTA PARA EL BOTÓN --- */
+        @keyframes pulso-atencion {
+            0% { box-shadow: 0 0 0 0 rgba(232, 74, 95, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(232, 74, 95, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(232, 74, 95, 0); }
+        }
+
+        .btn-alerta {
+            animation: pulso-atencion 2s infinite;
+        }
+
+        /* Punto de notificación en el botón */
+        .btn-alerta::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 14px;
+            height: 14px;
+            background-color: #FF3B30; /* Rojo intenso para resaltar */
+            border-radius: 50%;
+            border: 2px solid var(--blanco-puro);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 5% 5rem;
+            background: linear-gradient(135deg, var(--durazno-claro) 0%, var(--blanco-puro) 100%);
+        }
+
+        .hero-tagline {
+            color: var(--rojo-rosa);
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--carbon-oscuro);
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #444;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- Secciones Generales --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--carbon-oscuro);
+            margin-bottom: 3rem;
+        }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 5rem 5%;
+            background-color: var(--blanco-puro);
+        }
+
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: var(--fondo-gris);
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--verde-salvia);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(42, 54, 59, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--salmon);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            color: var(--carbon-oscuro);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Sección: Instrucciones (Paso a Paso) --- */
+        .instructions {
+            padding: 5rem 5%;
+            background-color: var(--verde-salvia);
+            color: var(--carbon-oscuro);
+        }
+
+        .instructions .section-title {
+            color: var(--carbon-oscuro);
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background-color: var(--blanco-puro);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            background-color: var(--rojo-rosa);
+            color: var(--blanco-puro);
+            font-size: 2rem;
+            font-weight: bold;
+            width: 70px;
+            height: 70px;
+            min-width: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .step-content h3 {
+            color: var(--rojo-rosa);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            color: var(--carbon-oscuro);
+            font-size: 1.1rem;
+        }
+
+        /* --- Como Funciona (Dual Mode) --- */
+        .how-it-works {
+            padding: 5rem 5%;
+            background-color: var(--carbon-oscuro);
+            color: var(--blanco-puro);
+            text-align: center;
+        }
+
+        .how-it-works .section-title { color: var(--durazno-claro); }
+
+        .dual-modes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .mode-box {
+            background-color: rgba(255,255,255,0.05);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            border: 1px solid rgba(254, 206, 171, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .mode-box:hover {
+            border-color: var(--salmon);
+            background-color: rgba(255,255,255,0.08);
+        }
+
+        .mode-box h3 {
+            color: var(--blanco-puro);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .mode-box h3 i {
+            color: var(--salmon);
+        }
+
+        /* --- Sección: Encuesta / Feedback --- */
+        .survey-section {
+            padding: 5rem 5%;
+            background-color: var(--durazno-claro);
+            display: flex;
+            justify-content: center;
+        }
+
+        .survey-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--blanco-puro);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            max-width: 900px;
+            width: 100%;
+            gap: 3rem;
+        }
+
+        .survey-text {
+            flex: 1;
+        }
+
+        .survey-text h2 {
+            color: var(--rojo-rosa);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .survey-text p {
+            font-size: 1.1rem;
+            color: var(--carbon-oscuro);
+            margin-bottom: 1rem;
+        }
+
+        .survey-qr {
+            width: 200px;
+            height: 200px;
+            flex-shrink: 0;
+            background: var(--blanco-puro);
+            padding: 10px;
+            border-radius: 12px;
+            border: 3px dashed var(--rojo-rosa);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efecto al pasar el mouse por el QR */
+        .survey-qr:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(232, 74, 95, 0.2);
+            border-style: solid;
+        }
+
+        .survey-qr a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        .survey-qr img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #1A2225;
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            header { flex-direction: column; gap: 1rem; }
+            .step-card { flex-direction: column; text-align: center; gap: 1rem; }
+            
+            .survey-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-key"></i> HEARTH & KEY
+        </div>
+        <a href="#encuesta" class="btn-cta btn-alerta"><i class="fa-solid fa-bell" style="margin-right: 5px;"></i> Ayúdanos a Mejorar</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-tagline">Control · Confianza · Conexión</div>
+        <h1>Convierte las Obligaciones en una Experiencia Positiva</h1>
+        <p>Hearth & Key es la aplicación de control parental que transforma los quehaceres en desafíos gratificantes. Fomenta la responsabilidad desbloqueando tiempo de pantalla a través de la disciplina y el esfuerzo.</p>
+        <a href="#encuesta" class="btn-cta" style="font-size: 1.1rem; padding: 15px 35px; background-color: var(--carbon-oscuro); border-color: var(--carbon-oscuro);">Participar en el Estudio</a>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">¿Por qué elegir Hearth & Key?</h2>
+        <div class="grid-features">
+            <div class="feature-card">
+                <i class="fa-solid fa-list-check feature-icon"></i>
+                <h3>Desafíos Personalizados</h3>
+                <p>Asigna tareas físicas, escolares o del hogar. Desde hacer sentadillas hasta lavar los trastes o terminar la tarea de matemáticas.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-camera-retro feature-icon"></i>
+                <h3>Evidencia Fotográfica</h3>
+                <p>Recibe notificaciones en tiempo real cuando un desafío sea completado. Aprueba la evidencia fotográfica enviada directamente desde el dispositivo de tu hijo.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-hourglass-half feature-icon"></i>
+                <h3>Recompensas de Tiempo</h3>
+                <p>El dispositivo se mantiene bloqueado hasta que apruebes una misión. Recompensa el esfuerzo con minutos exactos de acceso libre.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="instructions">
+        <h2 class="section-title">¿Cómo funciona la aplicación?</h2>
+        <div class="steps-container">
+            
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Vincula los Dispositivos</h3>
+                    <p>Inicia sesión en tu celular como <strong>Gestor</strong> para obtener un Token de seguridad. Luego, ingresa ese Token en el celular de tu hijo (Modo Miembro) para enlazarlos mediante la red WiFi de tu hogar.</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Lanza un Desafío</h3>
+                    <p>Desde tu Centro de Mando, crea una misión (ej. "Limpiar la habitación" o "Leer 15 minutos") y asígnale una recompensa de tiempo de pantalla. El dispositivo de tu hijo se mantendrá bloqueado de forma segura.</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Captura de Evidencia</h3>
+                    <p>Tu hijo verá los desafíos disponibles. Al terminar uno, usará la cámara de la app para tomar una foto del trabajo terminado y te la enviará al instante.</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Aprueba y Desbloquea</h3>
+                    <p>Revisa la foto recibida. Si apruebas la evidencia con un solo toque, el tiempo de pantalla se sumará automáticamente al dispositivo de tu hijo, permitiéndole usarlo libremente hasta que el temporizador llegue a cero.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">Una Aplicación, Dos Perspectivas</h2>
+        <p style="max-width: 600px; margin: 0 auto; font-size: 1.1rem; color: var(--durazno-claro);">Un ecosistema cerrado y seguro mediante vinculación por Token y red local.</p>
+        
+        <div class="dual-modes">
+            <div class="mode-box">
+                <h3><i class="fa-solid fa-user-shield"></i> Modo Gestor</h3>
+                <p>Tu centro de mando. Administra los desafíos, revisa la bandeja de evidencias pendientes y controla el tiempo disponible en el dispositivo vinculado con un solo toque.</p>
+            </div>
+            <div class="mode-box">
+                <h3><i class="fa-solid fa-gamepad"></i> Modo Miembro</h3>
+                <p>Una interfaz intuitiva donde se pueden ver las misiones disponibles, subir fotos de las tareas terminadas y ver el contador de tiempo ganado crecer.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="survey-section" id="encuesta">
+        <div class="survey-container">
+            <div class="survey-text">
+                <h2>¡Tu opinión es clave para nosotros!</h2>
+                <p>Estamos validando este proyecto para asegurarnos de que realmente ayude a las familias a equilibrar el uso de la tecnología y las responsabilidades del hogar.</p>
+                <p><strong>Por favor, apóyanos haciendo clic en el código QR o escaneándolo</strong> para contestar un breve formulario. ¡Te tomará menos de 2 minutos y nos será de gran ayuda!</p>
+            </div>
+            
+            <div class="survey-qr" title="Haz clic para abrir la encuesta">
+                <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=UXaQPMbYpkyopGokJDDmUwEqQLv1wUFKiFyHoai7A9VUQTJXR1VDSzM2RzJKUFQyS01ENlo3VVlRMy4u" target="_blank">
+                    <img src="qr-encuesta.png" alt="Código QR para Encuesta Hearth & Key">
+                </a>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Hearth & Key. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
