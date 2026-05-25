@@ -3,488 +3,524 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hearth & Key | Control Parental y Desafíos</title>
+    <title>Hearth & Key | Soluciones de Armonía Familiar Digital</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Nueva Paleta de Colores Extraída de la Imagen */
+        /* --- SISTEMA DE COLORES OSCUROS Y RELIEVES --- */
         :root {
-            --verde-salvia: #99B898;
-            --durazno-claro: #FECEAB;
-            --salmon: #FF847C;
-            --rojo-rosa: #E84A5F;
-            --carbon-oscuro: #2A363B;
-            --blanco-puro: #FFFFFF;
-            --fondo-gris: #F9F9F9;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--fondo-gris);
-            color: var(--carbon-oscuro);
-            line-height: 1.6;
-        }
-
-        /* --- Header y Navegación --- */
-        header {
-            background-color: var(--blanco-puro);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--carbon-oscuro);
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i { color: var(--rojo-rosa); }
-
-        .btn-cta {
-            background-color: var(--rojo-rosa);
-            color: var(--blanco-puro);
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--rojo-rosa);
-            position: relative; /* Necesario para la alerta */
-        }
-
-        .btn-cta:hover {
-            background-color: transparent;
-            color: var(--rojo-rosa);
-        }
-
-        /* --- ANIMACIÓN DE ALERTA PARA EL BOTÓN --- */
-        @keyframes pulso-atencion {
-            0% { box-shadow: 0 0 0 0 rgba(232, 74, 95, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(232, 74, 95, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(232, 74, 95, 0); }
-        }
-
-        .btn-alerta {
-            animation: pulso-atencion 2s infinite;
-        }
-
-        /* Punto de notificación en el botón */
-        .btn-alerta::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 14px;
-            height: 14px;
-            background-color: #FF3B30; /* Rojo intenso para resaltar */
-            border-radius: 50%;
-            border: 2px solid var(--blanco-puro);
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 6rem 5% 5rem;
-            background: linear-gradient(135deg, var(--durazno-claro) 0%, var(--blanco-puro) 100%);
-        }
-
-        .hero-tagline {
-            color: var(--rojo-rosa);
-            font-weight: 800;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            color: var(--carbon-oscuro);
-            margin-bottom: 1.5rem;
-            max-width: 800px;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #444;
-            max-width: 650px;
-            margin-bottom: 2.5rem;
-        }
-
-        /* --- Secciones Generales --- */
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--carbon-oscuro);
-            margin-bottom: 3rem;
-        }
-
-        /* --- Features Section --- */
-        .features {
-            padding: 5rem 5%;
-            background-color: var(--blanco-puro);
-        }
-
-        .grid-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background-color: var(--fondo-gris);
-            padding: 2.5rem;
-            border-radius: 16px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            border-top: 5px solid var(--verde-salvia);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(42, 54, 59, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--salmon);
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-card h3 {
-            color: var(--carbon-oscuro);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        /* --- Sección: Instrucciones (Paso a Paso) --- */
-        .instructions {
-            padding: 5rem 5%;
-            background-color: var(--verde-salvia);
-            color: var(--carbon-oscuro);
-        }
-
-        .instructions .section-title {
-            color: var(--carbon-oscuro);
-        }
-
-        .steps-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .step-card {
-            background-color: var(--blanco-puro);
-            border-radius: 16px;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .step-number {
-            background-color: var(--rojo-rosa);
-            color: var(--blanco-puro);
-            font-size: 2rem;
-            font-weight: bold;
-            width: 70px;
-            height: 70px;
-            min-width: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .step-content h3 {
-            color: var(--rojo-rosa);
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .step-content p {
-            color: var(--carbon-oscuro);
-            font-size: 1.1rem;
-        }
-
-        /* --- Como Funciona (Dual Mode) --- */
-        .how-it-works {
-            padding: 5rem 5%;
-            background-color: var(--carbon-oscuro);
-            color: var(--blanco-puro);
-            text-align: center;
-        }
-
-        .how-it-works .section-title { color: var(--durazno-claro); }
-
-        .dual-modes {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .mode-box {
-            background-color: rgba(255,255,255,0.05);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            border: 1px solid rgba(254, 206, 171, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .mode-box:hover {
-            border-color: var(--salmon);
-            background-color: rgba(255,255,255,0.08);
-        }
-
-        .mode-box h3 {
-            color: var(--blanco-puro);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .mode-box h3 i {
-            color: var(--salmon);
-        }
-
-        /* --- Sección: Encuesta / Feedback --- */
-        .survey-section {
-            padding: 5rem 5%;
-            background-color: var(--durazno-claro);
-            display: flex;
-            justify-content: center;
-        }
-
-        .survey-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: var(--blanco-puro);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-            max-width: 900px;
-            width: 100%;
-            gap: 3rem;
-        }
-
-        .survey-text {
-            flex: 1;
-        }
-
-        .survey-text h2 {
-            color: var(--rojo-rosa);
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .survey-text p {
-            font-size: 1.1rem;
-            color: var(--carbon-oscuro);
-            margin-bottom: 1rem;
-        }
-
-        .survey-qr {
-            width: 200px;
-            height: 200px;
-            flex-shrink: 0;
-            background: var(--blanco-puro);
-            padding: 10px;
-            border-radius: 12px;
-            border: 3px dashed var(--rojo-rosa);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Efecto al pasar el mouse por el QR */
-        .survey-qr:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 10px 20px rgba(232, 74, 95, 0.2);
-            border-style: solid;
-        }
-
-        .survey-qr a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
-        }
-
-        .survey-qr img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        /* --- Footer --- */
-        footer {
-            background-color: #1A2225;
-            color: rgba(255,255,255,0.6);
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            header { flex-direction: column; gap: 1rem; }
-            .step-card { flex-direction: column; text-align: center; gap: 1rem; }
+            --negro-fondo: #1E2425;
+            --gris-superficie: #343B3C;
+            --rojo-principal: #FF4F61;
+            --amarillo-acento: #FFCB3A;
+            --morado-gradiente: #511D47;
+            --blanco-suave: #F0F0F0;
+            --texto-secundario: #B3B9BA;
             
-            .survey-container {
-                flex-direction: column;
-                text-align: center;
-                padding: 2rem;
-            }
+            --relieve-externo: 0 15px 35px -5px rgba(0, 0, 0, 0.65), 0 5px 15px -3px rgba(0, 0, 0, 0.4);
+            --relieve-boton: 0 8px 20px rgba(255, 79, 97, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            --borde-sutil: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body { background-color: var(--negro-fondo); color: var(--blanco-suave); line-height: 1.8; overflow-x: hidden; }
+
+        /* --- BARRA DE NAVEGACIÓN --- */
+        header {
+            background-color: rgba(52, 59, 60, 0.98); backdrop-filter: blur(12px);
+            padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.5); position: sticky; top: 0; z-index: 1000; border-bottom: var(--borde-sutil);
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 900; color: var(--amarillo-acento); letter-spacing: 2px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .logo i { color: var(--rojo-principal); }
+
+        nav { display: flex; gap: 2.5rem; }
+        nav a { text-decoration: none; color: var(--texto-secundario); font-weight: 700; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; padding: 5px 10px; border-radius: 6px; }
+        nav a:hover, nav a.active-nav { color: var(--amarillo-acento); background-color: rgba(255,255,255,0.03); }
+
+        /* --- BOTONES --- */
+        .btn-cta {
+            background: linear-gradient(135deg, var(--rojo-principal) 0%, #FF8A70 100%); color: var(--blanco-puro);
+            padding: 14px 32px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 1rem;
+            display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer;
+            box-shadow: var(--relieve-boton); transition: all 0.3s;
+        }
+        .btn-cta:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(255, 79, 97, 0.6); }
+
+        /* --- CONTENEDOR DE PÁGINAS (SPA) --- */
+        .page-section { display: none; animation: fadeInRedirect 0.5s ease-out forwards; }
+        .page-section.active-page { display: block; }
+        @keyframes fadeInRedirect { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .container-wrapper { padding: 5rem 10%; max-width: 1400px; margin: 0 auto; }
+
+        /* --- VISTA: INICIO --- */
+        .hero-banner { background: radial-gradient(circle at top right, var(--morado-gradiente) 0%, var(--negro-fondo) 80%); text-align: center; padding: 7rem 5% 5rem; }
+        .hero-banner h1 { font-size: 3.8rem; font-weight: 900; letter-spacing: -1px; line-height: 1.2; margin-bottom: 2rem; }
+        .hero-banner h1 span { background: linear-gradient(to right, var(--amarillo-acento), var(--rojo-principal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-banner p { font-size: 1.3rem; color: var(--texto-secundario); max-width: 850px; margin: 0 auto 3.5rem; }
+
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+        .card-3d { background-color: var(--gris-superficie); border-radius: 24px; padding: 2.5rem; box-shadow: var(--relieve-externo); border: var(--borde-sutil); transition: all 0.3s ease; }
+        .card-3d:hover { transform: translateY(-8px); border-color: rgba(255, 203, 58, 0.3); }
+        .card-icon { width: 65px; height: 65px; background-color: rgba(255, 79, 97, 0.12); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--rojo-principal); margin-bottom: 1.5rem; }
+        .card-3d h3 { font-size: 1.5rem; color: white; margin-bottom: 1rem; }
+        .card-3d p { color: var(--texto-secundario); font-size: 1.05rem; }
+
+        .grandpa-guide { background-color: rgba(52, 59, 60, 0.5); border-radius: 24px; padding: 3rem; margin-top: 4rem; border-left: 6px solid var(--amarillo-acento); box-shadow: var(--relieve-externo); }
+        .grandpa-guide h4 { font-size: 1.4rem; color: var(--amarillo-acento); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+        .grandpa-guide p { font-size: 1.1rem; }
+
+        /* --- DETALLE DE PÁGINAS DEDICADAS --- */
+        .split-layout { display: flex; align-items: center; gap: 4rem; margin-bottom: 5rem; }
+        .split-layout:nth-child(even) { flex-direction: row-reverse; }
+        .split-info { flex: 1; }
+        .split-info h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: white; }
+        .split-info p { font-size: 1.15rem; color: var(--texto-secundario); margin-bottom: 1.5rem; }
+        
+        .phone-display { flex: 1; max-width: 340px; background-color: #1E2425; border-radius: 40px; border: 12px solid #2A363B; padding: 25px 15px; box-shadow: var(--relieve-externo); color: white; }
+        .phone-screen-card { background-color: var(--gris-superficie); border-radius: 16px; padding: 15px; margin-bottom: 15px; border: var(--borde-sutil); }
+
+        /* --- ASESOR VIRTUAL (CHAT CONTINUO) --- */
+        .virtual-assistant {
+            background: var(--negro-fondo); border-radius: 24px; border: 2px solid var(--amarillo-acento);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8); overflow: hidden; display: flex; flex-direction: column;
+            margin-top: 2rem; height: 650px;
+        }
+        
+        .assistant-header {
+            background: linear-gradient(135deg, var(--gris-superficie) 0%, var(--morado-gradiente) 100%);
+            padding: 1.5rem 2rem; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .assistant-avatar {
+            width: 55px; height: 55px; background: var(--amarillo-acento); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: var(--negro-fondo);
+            box-shadow: 0 4px 10px rgba(255,203,58,0.4);
+        }
+
+        .assistant-body { 
+            flex: 1; padding: 2rem; overflow-y: auto; background-color: #171b1c; scroll-behavior: smooth;
+        }
+        
+        /* Personalizando el scrollbar del chat */
+        .assistant-body::-webkit-scrollbar { width: 8px; }
+        .assistant-body::-webkit-scrollbar-track { background: #171b1c; }
+        .assistant-body::-webkit-scrollbar-thumb { background: var(--gris-superficie); border-radius: 4px; }
+
+        /* Globos de Chat */
+        .chat-bubble {
+            background: var(--gris-superficie); padding: 1.2rem; border-radius: 18px;
+            border-bottom-left-radius: 4px; font-size: 1.1rem; color: white;
+            margin-bottom: 1.5rem; max-width: 85%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: fadeInBubble 0.3s ease-out forwards;
+        }
+        
+        .chat-bubble.user {
+            background: var(--rojo-principal); margin-left: auto; border-radius: 18px;
+            border-bottom-right-radius: 4px; border-bottom-left-radius: 18px;
+        }
+
+        @keyframes fadeInBubble { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Botones de Opciones dentro del chat */
+        .options-container { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; animation: fadeInBubble 0.3s ease-out forwards; }
+        
+        .category-btn, .question-btn {
+            display: block; width: 100%; max-width: 90%; text-align: left; padding: 1.2rem;
+            background: var(--negro-fondo); color: white; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; font-size: 1.05rem; cursor: pointer; transition: all 0.2s; font-weight: 500;
+        }
+        .category-btn:hover, .question-btn:hover { background: rgba(255,255,255,0.05); border-color: var(--amarillo-acento); transform: translateX(5px); }
+        .category-btn i { color: var(--amarillo-acento); margin-right: 12px; font-size: 1.2rem; width: 25px; text-align: center; }
+
+        .back-btn {
+            background: transparent; border: none; color: var(--amarillo-acento);
+            cursor: pointer; font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: color 0.2s; padding: 10px 0;
+        }
+        .back-btn:hover { color: white; }
+
+        /* Animación de "escribiendo" realista */
+        .typing { display: flex; gap: 5px; padding: 5px; }
+        .typing span { width: 8px; height: 8px; background: var(--texto-secundario); border-radius: 50%; animation: blink 1.4s infinite both; }
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink { 0% { opacity: 0.2; } 20% { opacity: 1; } 100% { opacity: 0.2; } }
+
+        /* Animación de Pulso de Alerta en menú */
+        @keyframes pulseAlert {
+            0% { box-shadow: 0 0 0 0 rgba(255, 79, 97, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 79, 97, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 79, 97, 0); }
+        }
+        .pulse-btn { animation: pulseAlert 2.5s infinite; position: relative; }
+        .pulse-btn::after {
+            content: ''; position: absolute; top: -4px; right: -4px; width: 12px; height: 12px;
+            background-color: #FF3B30; border-radius: 50%; border: 2px solid white;
+        }
+
+        /* --- SECCIÓN ENCUESTA --- */
+        .survey-layout {
+            background-color: var(--gris-superficie); border-radius: 28px; padding: 4rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 3rem;
+            box-shadow: var(--relieve-externo); border: var(--borde-sutil); margin-top: 4rem;
+        }
+        .survey-qr {
+            width: 200px; height: 200px; background: white; padding: 10px; border-radius: 12px;
+            border: 4px dashed var(--rojo-principal); transition: transform 0.3s;
+        }
+        .survey-qr:hover { transform: scale(1.05); border-style: solid; }
+
+        @media (max-width: 968px) {
+            .split-layout, .split-layout:nth-child(even), .survey-layout { flex-direction: column; text-align: center; }
+            .hero-banner h1 { font-size: 2.5rem; }
+            nav { display: none; }
+            .phone-display { margin: 0 auto; }
+            .chat-bubble { max-width: 95%; }
+            .category-btn, .question-btn { max-width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <i class="fa-solid fa-key"></i> HEARTH & KEY
-        </div>
-        <a href="#encuesta" class="btn-cta btn-alerta"><i class="fa-solid fa-bell" style="margin-right: 5px;"></i> Ayúdanos a Mejorar</a>
+        <div class="logo" onclick="navigateTo('inicio')"><i class="fa-solid fa-key"></i> HEARTH & KEY</div>
+        <nav>
+            <a id="nav-inicio" class="active-nav" onclick="navigateTo('inicio')">Inicio</a>
+            <a id="nav-ecosistema" onclick="navigateTo('ecosistema')">El Ecosistema</a>
+            <a id="nav-gamificacion" onclick="navigateTo('gamificacion')">Gamificación</a>
+            <a id="nav-soporte" onclick="navigateTo('soporte')">Soporte Virtual</a>
+        </nav>
+        <button onclick="navigateTo('soporte')" class="btn-cta pulse-btn"><i class="fa-solid fa-headset"></i> Ayuda Uno a Uno</button>
     </header>
 
-    <section class="hero">
-        <div class="hero-tagline">Control · Confianza · Conexión</div>
-        <h1>Convierte las Obligaciones en una Experiencia Positiva</h1>
-        <p>Hearth & Key es la aplicación de control parental que transforma los quehaceres en desafíos gratificantes. Fomenta la responsabilidad desbloqueando tiempo de pantalla a través de la disciplina y el esfuerzo.</p>
-        <a href="#encuesta" class="btn-cta" style="font-size: 1.1rem; padding: 15px 35px; background-color: var(--carbon-oscuro); border-color: var(--carbon-oscuro);">Participar en el Estudio</a>
-    </section>
+    <div id="inicio" class="page-section active-page">
+        <section class="hero-banner">
+            <h1>Educación, Disciplina y <span>Armonía Digital</span></h1>
+            <p>No se trata de quitarle los teléfonos a nuestros nietos e hijos, sino de enseñarles que los privilegios de entretenimiento se ganan con respeto, colaboración y esfuerzo diario en el hogar.</p>
+            <button onclick="navigateTo('ecosistema')" class="btn-cta">Ver Cómo Funciona <i class="fa-solid fa-arrow-right"></i></button>
+        </section>
 
-    <section class="features">
-        <h2 class="section-title">¿Por qué elegir Hearth & Key?</h2>
-        <div class="grid-features">
-            <div class="feature-card">
-                <i class="fa-solid fa-list-check feature-icon"></i>
-                <h3>Desafíos Personalizados</h3>
-                <p>Asigna tareas físicas, escolares o del hogar. Desde hacer sentadillas hasta lavar los trastes o terminar la tarea de matemáticas.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-camera-retro feature-icon"></i>
-                <h3>Evidencia Fotográfica</h3>
-                <p>Recibe notificaciones en tiempo real cuando un desafío sea completado. Aprueba la evidencia fotográfica enviada directamente desde el dispositivo de tu hijo.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-hourglass-half feature-icon"></i>
-                <h3>Recompensas de Tiempo</h3>
-                <p>El dispositivo se mantiene bloqueado hasta que apruebes una misión. Recompensa el esfuerzo con minutos exactos de acceso libre.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="instructions">
-        <h2 class="section-title">¿Cómo funciona la aplicación?</h2>
-        <div class="steps-container">
-            
-            <div class="step-card">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Vincula los Dispositivos</h3>
-                    <p>Inicia sesión en tu celular como <strong>Gestor</strong> para obtener un Token de seguridad. Luego, ingresa ese Token en el celular de tu hijo (Modo Miembro) para enlazarlos mediante la red WiFi de tu hogar.</p>
+        <div class="container-wrapper">
+            <h2 style="text-align: center; font-size: 2.5rem;">Los Pilares del Proyecto</h2>
+            <div class="grid-cards">
+                <div class="card-3d">
+                    <div class="card-icon"><i class="fa-solid fa-house-lock"></i></div>
+                    <h3>Seguridad Interna</h3>
+                    <p>La aplicación no manda información, fotos ni claves a internet. Funciona de manera privada conectando los celulares directo al aparato WiFi de su casa.</p>
                 </div>
-            </div>
-
-            <div class="step-card">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Lanza un Desafío</h3>
-                    <p>Desde tu Centro de Mando, crea una misión (ej. "Limpiar la habitación" o "Leer 15 minutos") y asígnale una recompensa de tiempo de pantalla. El dispositivo de tu hijo se mantendrá bloqueado de forma segura.</p>
+                <div class="card-3d">
+                    <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <h3>Reglas Claras</h3>
+                    <p>El teléfono del joven permanece bloqueado. Usted decide cuándo se ha cumplido la tarea (lavar platos, tarea escolar) para liberarles sus minutos de juego.</p>
                 </div>
-            </div>
-
-            <div class="step-card">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Captura de Evidencia</h3>
-                    <p>Tu hijo verá los desafíos disponibles. Al terminar uno, usará la cámara de la app para tomar una foto del trabajo terminado y te la enviará al instante.</p>
+                <div class="card-3d">
+                    <div class="card-icon"><i class="fa-solid fa-store"></i></div>
+                    <h3>Fomento del Ahorro</h3>
+                    <p>Completar deberes otorga Llamas (puntos). Los jóvenes aprenden a ahorrar sus puntos para cambiarlos por grandes premios familiares el fin de semana.</p>
                 </div>
-            </div>
-
-            <div class="step-card">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Aprueba y Desbloquea</h3>
-                    <p>Revisa la foto recibida. Si apruebas la evidencia con un solo toque, el tiempo de pantalla se sumará automáticamente al dispositivo de tu hijo, permitiéndole usarlo libremente hasta que el temporizador llegue a cero.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="how-it-works">
-        <h2 class="section-title">Una Aplicación, Dos Perspectivas</h2>
-        <p style="max-width: 600px; margin: 0 auto; font-size: 1.1rem; color: var(--durazno-claro);">Un ecosistema cerrado y seguro mediante vinculación por Token y red local.</p>
-        
-        <div class="dual-modes">
-            <div class="mode-box">
-                <h3><i class="fa-solid fa-user-shield"></i> Modo Gestor</h3>
-                <p>Tu centro de mando. Administra los desafíos, revisa la bandeja de evidencias pendientes y controla el tiempo disponible en el dispositivo vinculado con un solo toque.</p>
-            </div>
-            <div class="mode-box">
-                <h3><i class="fa-solid fa-gamepad"></i> Modo Miembro</h3>
-                <p>Una interfaz intuitiva donde se pueden ver las misiones disponibles, subir fotos de las tareas terminadas y ver el contador de tiempo ganado crecer.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="survey-section" id="encuesta">
-        <div class="survey-container">
-            <div class="survey-text">
-                <h2>¡Tu opinión es clave para nosotros!</h2>
-                <p>Estamos validando este proyecto para asegurarnos de que realmente ayude a las familias a equilibrar el uso de la tecnología y las responsabilidades del hogar.</p>
-                <p><strong>Por favor, apóyanos haciendo clic en el código QR o escaneándolo</strong> para contestar un breve formulario. ¡Te tomará menos de 2 minutos y nos será de gran ayuda!</p>
             </div>
             
-            <div class="survey-qr" title="Haz clic para abrir la encuesta">
-                <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=UXaQPMbYpkyopGokJDDmUwEqQLv1wUFKiFyHoai7A9VUQTJXR1VDSzM2RzJKUFQyS01ENlo3VVlRMy4u" target="_blank">
-                    <img src="qr-encuesta.png" alt="Código QR para Encuesta Hearth & Key">
+            <div class="grandpa-guide">
+                <h4><i class="fa-solid fa-blind"></i> Explicación Sencilla para los Abuelos:</h4>
+                <p>¿Recuerda cuando decíamos: <em>"Primero terminas la tarea y luego sales a jugar"</em>? Esto hace exactamente lo mismo. El celular del niño se quedará "dormido" hasta que usted vea que ya levantó sus platos o tendió su cama. Al comprobar el trabajo en su propio celular, usted le regalará los minutos de juego que considere justos.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="ecosistema" class="page-section">
+        <div class="container-wrapper">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 4rem;">El Ecosistema Hearth & Key</h2>
+
+            <div class="split-layout">
+                <div class="split-info">
+                    <h2>1. Su Teléfono (Modo Gestor)</h2>
+                    <p>Es su centro de mando. Desde aquí, usted puede redactar misiones, enviar tareas imprevistas y recibir una campanada de aviso cuando los niños reporten que han terminado.</p>
+                    <p>No tiene que corretear por la casa; la aplicación le mostrará la foto del deber realizado directamente en su pantalla para que usted presione "Aprobar" o "Rechazar".</p>
+                </div>
+                <div class="phone-display">
+                    <div class="phone-screen-card">
+                        <div style="font-weight: 900; font-size: 13px;">CENTRO DE MANDO</div>
+                    </div>
+                    <div class="phone-screen-card" style="border-left: 4px solid var(--rojo-principal);">
+                        <div style="font-size: 13px; font-weight: bold;">Misión por revisar:</div>
+                        <div style="font-size: 11px; color: var(--texto-secundario); margin: 5px 0;">"Limpiar la habitación"</div>
+                        <div style="background-color: var(--negro-fondo); height: 80px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: gray; font-size: 11px;"><i class="fa-solid fa-image"></i> Evidencia del niño</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="split-layout">
+                <div class="split-info">
+                    <h2>2. Teléfono del Joven (Modo Miembro)</h2>
+                    <p>Una pantalla limpia y segura. Cuando el tiempo permitido se agota, el celular se bloquea y muestra un candado rojo gigante.</p>
+                    <p>Para abrirlo, el menor debe realizar una de las tareas asignadas, encender su cámara y tomarle una foto a la tarea terminada para que usted se la valide a distancia.</p>
+                </div>
+                <div class="phone-display" style="background: radial-gradient(circle, var(--morado-gradiente) 0%, #1E2425 100%);">
+                    <div style="text-align: center; padding: 40px 10px;">
+                        <i class="fa-solid fa-lock" style="color: var(--rojo-principal); font-size: 3rem; margin-bottom: 15px;"></i>
+                        <div style="font-weight: 900; font-size: 16px;">ACCESO RESTRINGIDO</div>
+                        <div style="font-size: 11px; color: var(--texto-secundario); margin-top: 5px;">Tiempo agotado. Realiza una misión para continuar.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gamificacion" class="page-section">
+        <div class="container-wrapper">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 4rem;">Economía y Premios (Gamificación)</h2>
+
+            <div class="split-layout">
+                <div class="split-info">
+                    <h2>El Banco del Esfuerzo Familiar</h2>
+                    <p><strong>Por cada 60 minutos de desafíos bien realizados, el niño ganará una Llama (🔥).</strong></p>
+                    <p>Al acumular tareas perfectas, subirán de categoría para que usted reconozca su buen comportamiento:</p>
+                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 10px;">
+                        <div style="background-color: var(--gris-superficie); padding: 12px; border-radius: 10px;">🥉 <strong>Bronce:</strong> 10 desafíos logrados.</div>
+                        <div style="background-color: var(--gris-superficie); padding: 12px; border-radius: 10px;">🥈 <strong>Plata:</strong> 25 desafíos logrados.</div>
+                        <div style="background-color: var(--gris-superficie); padding: 12px; border-radius: 10px;">🥇 <strong>Oro:</strong> 50 desafíos logrados (Máxima confianza).</div>
+                    </div>
+                </div>
+                <div class="phone-display">
+                    <div class="phone-screen-card" style="text-align: center; border: 1px solid var(--amarillo-acento);">
+                        <div style="font-size: 11px; color: gray;">ESTADO DE RECOMPENSAS</div>
+                        <div style="font-size: 24px; font-weight: 900; margin: 10px 0; color: var(--amarillo-acento);"> RANGO: PLATA 🥈</div>
+                        <div style="font-size: 13px; color: var(--blanco-suave);">¡Tienes 🔥 12 Llamas acumuladas!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="soporte" class="page-section">
+        <div class="container-wrapper">
+            <h2 style="text-align: center; font-size: 2.5rem;">Asesoría Personalizada Uno a Uno</h2>
+            <p style="text-align: center; color: var(--texto-secundario); font-size: 1.1rem; max-width: 700px; margin: 0 auto 3rem;">Sabemos que la tecnología puede generar dudas. Hemos preparado un asistente interactivo especial para guiarle paso a paso con la paciencia que usted merece.</p>
+
+            <div class="virtual-assistant">
+                <div class="assistant-header">
+                    <div class="assistant-avatar"><i class="fa-solid fa-headset"></i></div>
+                    <div>
+                        <h3 id="nombre-asesor" style="color: white; font-size: 1.3rem;">Asesoría Hearth & Key</h3>
+                        <p style="color: var(--amarillo-acento); font-size: 0.95rem; font-weight: 600;">En línea - Listo para ayudarle</p>
+                    </div>
+                </div>
+                
+                <div class="assistant-body" id="chat-body">
+                    </div>
+            </div>
+
+            <div class="survey-layout" style="margin-top: 5rem;">
+                <div style="flex: 1;">
+                    <h2 style="color: white; font-weight: 900; margin-bottom: 1rem;">Ayúdenos a mejorar (Estudio)</h2>
+                    <p style="color: var(--texto-secundario); font-size: 1.1rem; margin-bottom: 2rem;">
+                        Estamos perfeccionando esta aplicación y su opinión es nuestra pieza más importante. Por favor, dedique 2 minutos a contestar nuestro formulario tocando el código o el botón.
+                    </p>
+                    <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=UXaQPMbYpkyopGokJDDmUwEqQLv1wUFKiFyHoai7A9VUQTJXR1VDSzM2RzJKUFQyS01ENlo3VVlRMy4u" target="_blank" class="btn-cta">
+                        Contestar Formulario
+                    </a>
+                </div>
+                <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=UXaQPMbYpkyopGokJDDmUwEqQLv1wUFKiFyHoai7A9VUQTJXR1VDSzM2RzJKUFQyS01ENlo3VVlRMy4u" target="_blank" title="Haga clic aquí para ir al formulario">
+                    <div class="survey-qr">
+                        <img src="qr-encuesta.png" alt="Código QR Encuesta" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
                 </a>
             </div>
-            
-        </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2026 Hearth & Key. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: gray; margin-top: 3rem; border-top: 1px solid #333;">
+        <p>&copy; 2026 Hearth & Key. Tecnología con propósito familiar.</p>
     </footer>
+
+
+    <script>
+        // 1. NAVEGACIÓN ENTRE PÁGINAS (SPA)
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+            
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-nav'));
+            const navItem = document.getElementById('nav-' + pageId);
+            if(navItem) navItem.classList.add('active-nav');
+            
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        // 2. BASE DE DATOS DE PREGUNTAS
+        const faqData = {
+            gestor: [
+                { q: "¿Cómo enlazo o conecto el celular de mi nieto con el mío?", a: "Es muy fácil. Su aplicación (Centro de Mando) le mostrará un número grande de 6 dígitos llamado 'Token'. Solo debe teclear ese número en el celular del joven estando conectados a la misma red WiFi de la casa. ¡Listo!" },
+                { q: "¿Necesito pagar plan de datos de internet para usarla?", a: "No se preocupe. La aplicación está programada para funcionar internamente a través del aparato WiFi de su casa. No gasta sus datos telefónicos ni manda información a internet." },
+                { q: "¿Qué pasa si envío una tarea y me equivoqué?", a: "No hay problema. Desde su pantalla de inicio usted puede cancelar o editar cualquier misión que haya mandado antes de que el joven la realice." },
+                { q: "¿Puedo poner un castigo de tiempo o quitarle minutos?", a: "El sistema está diseñado 100% para la crianza positiva (premios). No permite 'restar' minutos de castigo, pero recuerde que si no cumplen la tarea, simplemente el teléfono se quedará bloqueado." },
+                { q: "¿Qué hago si rechacé la foto de la tarea por accidente?", a: "El joven verá que la tarea fue rechazada. Solamente dígale que vuelva a presionar el botón de la cámara para que le reenvíe la fotografía y ahora sí la pueda aprobar." },
+                { q: "¿Puedo controlar la tablet y el celular al mismo tiempo?", a: "Para mantener la máxima seguridad y que la conexión sea irrompible, el sistema actualmente conecta 1 celular de adulto con 1 aparato de joven (conexión uno a uno)." },
+                { q: "¿Cómo desvinculo o apago el sistema si salimos de vacaciones?", a: "En su Centro de Mando, arriba a la derecha en notificaciones, podrá detener el bloqueo o generar un 'Nuevo Token' para cortar la comunicación anterior." }
+            ],
+            miembro: [
+                { q: "¿El celular del niño se bloquea por completo para todo?", a: "¡Para nada! La seguridad es primero. Las llamadas de emergencia y los contactos clave familiares siempre estarán disponibles, únicamente se bloquean los juegos, videos y redes sociales." },
+                { q: "¿Puede el joven borrar la aplicación para hacer trampa?", a: "No. Hemos implementado un candado de seguridad interno. Si intentan borrar la aplicación, se apagará la pantalla y el bloqueo se mantendrá más fuerte al encenderlo." },
+                { q: "¿Qué pasa si se acaba el tiempo de juego mientras hace tarea escolar?", a: "El sistema no afectará sus herramientas escolares. Si usted considera que el joven necesita más tiempo, desde su teléfono (Gestor) puede mandarle 'Minutos Extra' gratuitos en cualquier momento." },
+                { q: "¿Se le llena la memoria del teléfono al niño con tanta foto?", a: "No. La cámara toma una foto rápida que viaja directo a su celular y se borra inmediatamente del teléfono del joven para no gastarle su memoria." },
+                { q: "¿Cómo sabe el joven cuánto tiempo le queda?", a: "El celular del joven tendrá una barra de color en la parte de arriba que le irá avisando minuto a minuto. Además, si bloquea el teléfono, la pantalla principal le recordará su saldo." },
+                { q: "¿Puede usar fotos viejas de la galería para engañarme?", a: "Imposible. La aplicación enciende la cámara en vivo en ese exacto instante. El joven no puede abrir álbumes pasados ni usar fotos descargadas de internet." }
+            ],
+            recompensas: [
+                { q: "¿Cómo es que ganan las 'Llamas' (🔥)?", a: "El sistema es automático: La aplicación lleva un conteo secreto y por cada 60 minutos totales que el joven gane haciendo sus deberes bien, la app le regalará 1 Llama." },
+                { q: "¿Puedo inventar yo mismo los premios familiares?", a: "¡Por supuesto! Esa es la mejor parte. Además de los premios de fábrica, usted puede escribir sus propios premios como 'Yo elijo la cena hoy' o 'Ir por un helado'." },
+                { q: "¿Para qué sirven las medallas de Bronce, Plata y Oro?", a: "Son rangos de honor. El joven empezará sin medalla, pero al cumplir 10 tareas subirá a Bronce, a las 25 a Plata y a las 50 a Oro. Esto les da mucho orgullo y sentido de logro." },
+                { q: "¿Las Llamas se borran el fin de semana?", a: "No, funcionan igual que una cuenta de ahorros del banco. Las Llamas se quedan guardadas en su perfil hasta que el joven decida que quiere gastarlas en la Tienda." },
+                { q: "¿Cómo sabe el niño cuándo ya puede pedir un premio?", a: "Cuando el joven tenga suficientes Llamas guardadas, los botones de los premios en su Tienda cambiarán a color rojo vivo, avisándole que ya le alcanza para comprarlo." },
+                { q: "¿El niño puede cobrarse el premio sin pedirme permiso?", a: "De ninguna manera. Cuando el niño presiona 'Canjear' en un premio, la aplicación le envía una alerta a usted. Hasta que usted apruebe entregar el premio físico, este no se cobra." },
+                { q: "¿Hay un límite de cuántas Llamas pueden juntar?", a: "No hay límite de ahorro, ¡queremos fomentar que sean ahorradores! Pero algunos premios muy grandes tienen una regla de 'Enfriamiento' de 30 días para que no los pidan diario." }
+            ]
+        };
+
+        // 3. LÓGICA DEL ASISTENTE VIRTUAL (CHAT CONTINUO)
+        
+        // Nombres del equipo rotativos
+        const nombresEquipo = ['Villar', 'Ariana', 'Estephany', 'Elayne', 'Alejandro'];
+        const asesorActual = nombresEquipo[Math.floor(Math.random() * nombresEquipo.length)];
+        const chatBody = document.getElementById('chat-body');
+
+        // Inicializar el chat al cargar la página
+        window.onload = () => {
+            document.getElementById('nombre-asesor').innerText = 'Asesor(a) ' + asesorActual;
+            iniciarChat();
+        };
+
+        function scrollBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Agregar globo de texto del bot
+        function addBotMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'chat-bubble';
+            div.innerHTML = text;
+            chatBody.appendChild(div);
+            scrollBottom();
+        }
+
+        // Agregar globo de texto del usuario (rojo y a la derecha)
+        function addUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'chat-bubble user';
+            div.innerHTML = text;
+            chatBody.appendChild(div);
+            scrollBottom();
+        }
+
+        // Mostrar animación de escribiendo...
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'chat-bubble typing-bubble';
+            div.id = 'current-typing';
+            div.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+            chatBody.appendChild(div);
+            scrollBottom();
+        }
+
+        // Eliminar animación de escribiendo
+        function removeTyping() {
+            const typingEl = document.getElementById('current-typing');
+            if (typingEl) typingEl.remove();
+        }
+
+        // Mostrar botones de las Categorías Principales
+        function showCategories(mensajePrevio = null) {
+            if (mensajePrevio) addBotMessage(mensajePrevio);
+            
+            const container = document.createElement('div');
+            container.className = 'options-container';
+            container.innerHTML = `
+                <button class="category-btn" onclick="selectCategory('gestor', 'Teléfono del Adulto (Gestor)')"><i class="fa-solid fa-mobile-screen-button"></i> Teléfono del Adulto (Gestor)</button>
+                <button class="category-btn" onclick="selectCategory('miembro', 'Teléfono del Joven (Bloqueo)')"><i class="fa-solid fa-lock"></i> Teléfono del Joven (Bloqueo)</button>
+                <button class="category-btn" onclick="selectCategory('recompensas', 'Reglas de Premios y Llamas')"><i class="fa-solid fa-fire"></i> Reglas de Premios y Llamas</button>
+            `;
+            chatBody.appendChild(container);
+            scrollBottom();
+        }
+
+        // Acción: Usuario eligió una Categoría
+        window.selectCategory = function(catId, catName) {
+            // Eliminar opciones para que el chat quede limpio
+            removeActiveOptions();
+            
+            addUserMessage("Me interesa saber sobre: <strong>" + catName + "</strong>");
+            showTyping();
+            
+            // Simular respuesta rápida para mostrar sub-preguntas (1 segundo)
+            setTimeout(() => {
+                removeTyping();
+                addBotMessage("¡Perfecto! Aquí tengo las dudas más comunes sobre ese tema. Seleccione la pregunta exacta que tiene en mente:");
+                showQuestions(catId);
+            }, 1000);
+        }
+
+        // Mostrar botones de Preguntas Específicas
+        function showQuestions(catId) {
+            const container = document.createElement('div');
+            container.className = 'options-container';
+            
+            faqData[catId].forEach((item, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'question-btn';
+                btn.innerHTML = `<strong>${index + 1}.</strong> ${item.q}`;
+                btn.onclick = () => selectQuestion(item.q, item.a);
+                container.appendChild(btn);
+            });
+
+            const backBtn = document.createElement('button');
+            backBtn.className = 'back-btn';
+            backBtn.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Elegir otro tema distinto';
+            backBtn.onclick = () => {
+                removeActiveOptions();
+                showCategories("Claro, ¿qué otro tema le gustaría revisar?");
+            };
+            
+            container.appendChild(backBtn);
+            chatBody.appendChild(container);
+            scrollBottom();
+        }
+
+        // Acción: Usuario eligió una Pregunta Exacta
+        window.selectQuestion = function(pregunta, respuesta) {
+            removeActiveOptions();
+            addUserMessage(pregunta);
+            
+            // Simular que el asesor está pensando/escribiendo durante 2 SEGUNDOS
+            showTyping();
+            setTimeout(() => {
+                removeTyping();
+                addBotMessage(respuesta); // Muestra la respuesta
+                
+                // Mostrar automáticamente el menú principal de nuevo después de 1 segundo de leer
+                setTimeout(() => {
+                    showCategories("¿Le puedo ayudar a resolver alguna otra duda?");
+                }, 1500);
+                
+            }, 2000); // <-- 2000ms = 2 Segundos de espera
+        }
+
+        // Utilidad: quitar botones viejos para que el historial quede como texto
+        function removeActiveOptions() {
+            const opts = document.querySelectorAll('.options-container');
+            opts.forEach(opt => opt.remove());
+        }
+
+        // Arrancar el flujo inicial
+        function iniciarChat() {
+            chatBody.innerHTML = ''; // Limpiar chat
+            addBotMessage(`¡Hola! Qué gusto saludarle. Soy su asesor personal <strong>${asesorActual}</strong>. He organizado las respuestas a sus dudas en 3 grandes áreas. ¿En cuál le gustaría que le apoye hoy?`);
+            showCategories();
+        }
+
+    </script>
 
 </body>
 </html>
