@@ -31,12 +31,22 @@
             overflow-x: hidden; 
         }
 
-        /* --- BARRA DE NAVEGACIÓN (ESCRITORIO) --- */
+        /* --- BARRA DE NAVEGACIÓN SUPERIOR --- */
         header {
             background-color: rgba(52, 59, 60, 0.98); backdrop-filter: blur(12px);
             padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 4px 25px rgba(0,0,0,0.5); position: sticky; top: 0; z-index: 1000; border-bottom: var(--borde-sutil);
         }
+
+        /* Botón Menú Hamburguesa (Oculto en PC) */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--blanco-suave);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .mobile-menu-btn:hover { color: var(--amarillo-acento); }
 
         .logo { font-size: 1.6rem; font-weight: 900; color: var(--amarillo-acento); letter-spacing: 2px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .logo i { color: var(--rojo-principal); }
@@ -44,9 +54,6 @@
         .desktop-nav { display: flex; gap: 2.5rem; }
         .desktop-nav a { text-decoration: none; color: var(--texto-secundario); font-weight: 700; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; padding: 5px 10px; border-radius: 6px; }
         .desktop-nav a:hover, .desktop-nav a.active-nav { color: var(--amarillo-acento); background-color: rgba(255,255,255,0.03); }
-
-        /* --- BARRA DE NAVEGACIÓN MÓVIL (APP STYLE) --- */
-        .mobile-nav { display: none; } /* Oculta por defecto en PC */
 
         /* --- BOTONES --- */
         .btn-cta {
@@ -56,6 +63,36 @@
             box-shadow: var(--relieve-boton); transition: all 0.3s;
         }
         .btn-cta:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(255, 79, 97, 0.6); }
+
+        /* --- MENÚ LATERAL MÓVIL (SIDEBAR) --- */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: rgba(30, 36, 37, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            padding: 2rem;
+            box-shadow: 10px 0 25px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-sidebar.open { left: 0; }
+
+        .sidebar-close {
+            align-self: flex-end; font-size: 2rem; color: var(--rojo-principal); cursor: pointer; margin-bottom: 2rem;
+        }
+
+        .sidebar-links { display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar-links a {
+            color: var(--blanco-suave); text-decoration: none; font-size: 1.2rem; font-weight: 700;
+            display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 10px; transition: background 0.3s;
+        }
+        .sidebar-links a:hover, .sidebar-links a.active-nav { background: rgba(255,255,255,0.05); color: var(--amarillo-acento); }
+        .sidebar-links a i { color: var(--amarillo-acento); width: 25px; text-align: center; font-size: 1.4rem; }
 
         /* --- CONTENEDOR DE PÁGINAS (SPA) --- */
         .page-section { display: none; animation: fadeInRedirect 0.5s ease-out forwards; }
@@ -180,7 +217,7 @@
            ========================================================================== */
         @media (max-width: 968px) {
             
-            /* Ajustes Generales y de Contenedores */
+            /* Ajustes Generales */
             .container-wrapper { padding: 3rem 5%; }
             .split-layout, .split-layout:nth-child(even), .survey-layout { 
                 flex-direction: column; text-align: center; gap: 2rem; 
@@ -195,61 +232,63 @@
             .split-info h2 { font-size: 1.8rem; }
             .section-title { font-size: 2rem !important; margin-bottom: 2rem !important;}
             
-            /* Ajuste del Chat para que quepa bien en pantalla de celular */
+            /* Ajuste del Chat */
             .virtual-assistant { height: 75vh; min-height: 450px; max-height: 600px; margin-top: 1rem; }
             .chat-bubble { max-width: 95%; font-size: 0.95rem; padding: 1rem; }
             
-            /* --- NAVEGACIÓN MÓVIL TIPO APP --- */
-            /* Ocultar el menú superior y botón CTA en la cabecera */
-            .desktop-nav { display: none; }
-            .header-btn { display: none; }
-            header { padding: 1rem 5%; justify-content: center; } /* Centra el logo */
+            /* --- REORDENANDO EL HEADER MÓVIL --- */
+            .desktop-nav { display: none; } /* Ocultar menú normal */
+            .header-btn { display: none; }  /* Ocultar botón gigante de arriba */
+            .mobile-menu-btn { display: block; } /* Mostrar hamburguesa */
             
-            /* Habilitar espacio inferior para que el menú no tape contenido */
-            body { padding-bottom: 80px; }
-            footer { padding-bottom: 100px !important; }
-
-            /* Estilos de la barra inferior */
-            .mobile-nav {
-                display: flex; justify-content: space-around; align-items: center;
-                position: fixed; bottom: 0; left: 0; right: 0;
-                background: rgba(30, 36, 37, 0.98); backdrop-filter: blur(15px);
-                padding: 12px 5%; z-index: 2000;
-                border-top: 1px solid rgba(255,255,255,0.1);
-                padding-bottom: calc(12px + env(safe-area-inset-bottom));
-                box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-            }
-            .mobile-nav a {
-                color: var(--texto-secundario); text-decoration: none;
-                display: flex; flex-direction: column; align-items: center; 
-                font-size: 0.70rem; font-weight: 600; gap: 5px; transition: all 0.3s;
-            }
-            .mobile-nav a.active-nav { color: var(--amarillo-acento); transform: translateY(-3px); }
-            .mobile-nav a i { font-size: 1.4rem; }
-            
-            /* Botón resaltado del centro en el menú móvil */
-            .mobile-nav .nav-highlight i {
-                background: linear-gradient(135deg, var(--rojo-principal) 0%, #FF8A70 100%);
-                color: white; padding: 12px; border-radius: 50%;
-                font-size: 1.2rem; transform: translateY(-15px);
-                box-shadow: var(--relieve-boton); border: 3px solid var(--negro-fondo);
-            }
-            .mobile-nav .nav-highlight.active-nav i { border-color: var(--amarillo-acento); }
+            /* Header limpio: Hamburguesa izq, Logo centro/der */
+            header { padding: 1rem 5%; justify-content: flex-start; gap: 20px; }
+            .logo { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
+        <div class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        
         <div class="logo" onclick="navigateTo('inicio')"><i class="fa-solid fa-key"></i> HEARTH & KEY</div>
+        
         <nav class="desktop-nav">
             <a id="nav-inicio-desk" class="active-nav" onclick="navigateTo('inicio')">Inicio</a>
             <a id="nav-ecosistema-desk" onclick="navigateTo('ecosistema')">El Ecosistema</a>
             <a id="nav-gamificacion-desk" onclick="navigateTo('gamificacion')">Gamificación</a>
             <a id="nav-soporte-desk" onclick="navigateTo('soporte')">Soporte Virtual</a>
         </nav>
+        
         <button onclick="navigateTo('soporte')" class="btn-cta pulse-btn header-btn"><i class="fa-solid fa-headset"></i> Ayuda Uno a Uno</button>
     </header>
+
+    <div id="mobile-sidebar" class="mobile-sidebar">
+        <div class="sidebar-close" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="sidebar-links">
+            <a id="nav-inicio-mob" class="active-nav" onclick="navigateFromMobile('inicio')">
+                <i class="fa-solid fa-house"></i> Inicio
+            </a>
+            <a id="nav-ecosistema-mob" onclick="navigateFromMobile('ecosistema')">
+                <i class="fa-solid fa-mobile-screen"></i> El Ecosistema
+            </a>
+            <a id="nav-gamificacion-mob" onclick="navigateFromMobile('gamificacion')">
+                <i class="fa-solid fa-fire"></i> Premios y Llamas
+            </a>
+            <a id="nav-soporte-mob" onclick="navigateFromMobile('soporte')">
+                <i class="fa-solid fa-headset"></i> Soporte Virtual
+            </a>
+            
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 10px 0;">
+            
+            <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=UXaQPMbYpkyopGokJDDmUwEqQLv1wUFKiFyHoai7A9VUQTJXR1VDSzM2RzJKUFQyS01ENlo3VVlRMy4u" target="_blank" style="background: var(--rojo-principal); justify-content: center; color: white;">
+                <i class="fa-solid fa-file-signature" style="color: white;"></i> Encuesta Oficial
+            </a>
+        </div>
+    </div>
 
     <div id="inicio" class="page-section active-page">
         <section class="hero-banner">
@@ -392,37 +431,26 @@
         <p>&copy; 2026 Hearth & Key. Tecnología con propósito familiar.</p>
     </footer>
 
-    <nav class="mobile-nav">
-        <a id="nav-inicio-mob" class="active-nav" onclick="navigateTo('inicio')">
-            <i class="fa-solid fa-house"></i>
-            <span>Inicio</span>
-        </a>
-        <a id="nav-ecosistema-mob" onclick="navigateTo('ecosistema')">
-            <i class="fa-solid fa-mobile-screen"></i>
-            <span>Ecosistema</span>
-        </a>
-        
-        <a id="nav-soporte-mob" class="nav-highlight pulse-btn" onclick="navigateTo('soporte')">
-            <i class="fa-solid fa-headset"></i>
-            <span>Ayuda</span>
-        </a>
-        
-        <a id="nav-gamificacion-mob" onclick="navigateTo('gamificacion')">
-            <i class="fa-solid fa-fire"></i>
-            <span>Premios</span>
-        </a>
-    </nav>
-
 
     <script>
-        // 1. NAVEGACIÓN ENTRE PÁGINAS (SPA)
+        // 1. CONTROL DEL MENÚ MÓVIL
+        function toggleMenu() {
+            document.getElementById('mobile-sidebar').classList.toggle('open');
+        }
+
+        function navigateFromMobile(pageId) {
+            navigateTo(pageId);
+            toggleMenu(); // Cierra el menú al hacer clic
+        }
+
+        // 2. NAVEGACIÓN ENTRE PÁGINAS (SPA)
         function navigateTo(pageId) {
             // Ocultar todas las páginas
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-page'));
             document.getElementById(pageId).classList.add('active-page');
             
             // Quitar clase "active" de TODOS los links (Escritorio y Móvil)
-            document.querySelectorAll('header nav a, .mobile-nav a').forEach(a => a.classList.remove('active-nav'));
+            document.querySelectorAll('header nav a, .sidebar-links a').forEach(a => a.classList.remove('active-nav'));
             
             // Asignar clase "active" a los links correspondientes
             const navDesk = document.getElementById('nav-' + pageId + '-desk');
@@ -434,7 +462,7 @@
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
-        // 2. BASE DE DATOS DE PREGUNTAS
+        // 3. BASE DE DATOS DE PREGUNTAS
         const faqData = {
             gestor: [
                 { q: "¿Cómo enlazo o conecto el celular de mi nieto con el mío?", a: "Es muy fácil. Su aplicación (Centro de Mando) le mostrará un número grande de 6 dígitos llamado 'Token'. Solo debe teclear ese número en el celular del joven estando conectados a la misma red WiFi de la casa. ¡Listo!" },
@@ -464,7 +492,7 @@
             ]
         };
 
-        // 3. LÓGICA DEL ASISTENTE VIRTUAL (CHAT CONTINUO)
+        // 4. LÓGICA DEL ASISTENTE VIRTUAL (CHAT CONTINUO)
         const nombresEquipo = ['Villar', 'Ariana', 'Estephany', 'Elayne', 'Alejandro'];
         const asesorActual = nombresEquipo[Math.floor(Math.random() * nombresEquipo.length)];
         const chatBody = document.getElementById('chat-body');
