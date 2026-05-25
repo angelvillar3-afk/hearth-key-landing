@@ -24,9 +24,14 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-        body { background-color: var(--negro-fondo); color: var(--blanco-suave); line-height: 1.8; overflow-x: hidden; }
+        body { 
+            background-color: var(--negro-fondo); 
+            color: var(--blanco-suave); 
+            line-height: 1.8; 
+            overflow-x: hidden; 
+        }
 
-        /* --- BARRA DE NAVEGACIÓN --- */
+        /* --- BARRA DE NAVEGACIÓN (ESCRITORIO) --- */
         header {
             background-color: rgba(52, 59, 60, 0.98); backdrop-filter: blur(12px);
             padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
@@ -36,15 +41,18 @@
         .logo { font-size: 1.6rem; font-weight: 900; color: var(--amarillo-acento); letter-spacing: 2px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .logo i { color: var(--rojo-principal); }
 
-        nav { display: flex; gap: 2.5rem; }
-        nav a { text-decoration: none; color: var(--texto-secundario); font-weight: 700; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; padding: 5px 10px; border-radius: 6px; }
-        nav a:hover, nav a.active-nav { color: var(--amarillo-acento); background-color: rgba(255,255,255,0.03); }
+        .desktop-nav { display: flex; gap: 2.5rem; }
+        .desktop-nav a { text-decoration: none; color: var(--texto-secundario); font-weight: 700; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; padding: 5px 10px; border-radius: 6px; }
+        .desktop-nav a:hover, .desktop-nav a.active-nav { color: var(--amarillo-acento); background-color: rgba(255,255,255,0.03); }
+
+        /* --- BARRA DE NAVEGACIÓN MÓVIL (APP STYLE) --- */
+        .mobile-nav { display: none; } /* Oculta por defecto en PC */
 
         /* --- BOTONES --- */
         .btn-cta {
             background: linear-gradient(135deg, var(--rojo-principal) 0%, #FF8A70 100%); color: var(--blanco-puro);
             padding: 14px 32px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 1rem;
-            display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer;
             box-shadow: var(--relieve-boton); transition: all 0.3s;
         }
         .btn-cta:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(255, 79, 97, 0.6); }
@@ -61,10 +69,10 @@
         .hero-banner h1 span { background: linear-gradient(to right, var(--amarillo-acento), var(--rojo-principal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-banner p { font-size: 1.3rem; color: var(--texto-secundario); max-width: 850px; margin: 0 auto 3.5rem; }
 
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
         .card-3d { background-color: var(--gris-superficie); border-radius: 24px; padding: 2.5rem; box-shadow: var(--relieve-externo); border: var(--borde-sutil); transition: all 0.3s ease; }
         .card-3d:hover { transform: translateY(-8px); border-color: rgba(255, 203, 58, 0.3); }
-        .card-icon { width: 65px; height: 65px; background-color: rgba(255, 79, 97, 0.12); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--rojo-principal); margin-bottom: 1.5rem; }
+        .card-icon { width: 60px; height: 60px; background-color: rgba(255, 79, 97, 0.12); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--rojo-principal); margin-bottom: 1.5rem; }
         .card-3d h3 { font-size: 1.5rem; color: white; margin-bottom: 1rem; }
         .card-3d p { color: var(--texto-secundario); font-size: 1.05rem; }
 
@@ -73,13 +81,13 @@
         .grandpa-guide p { font-size: 1.1rem; }
 
         /* --- DETALLE DE PÁGINAS DEDICADAS --- */
-        .split-layout { display: flex; align-items: center; gap: 4rem; margin-bottom: 5rem; }
+        .split-layout { display: flex; align-items: center; justify-content: space-between; gap: 4rem; margin-bottom: 5rem; }
         .split-layout:nth-child(even) { flex-direction: row-reverse; }
         .split-info { flex: 1; }
         .split-info h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: white; }
         .split-info p { font-size: 1.15rem; color: var(--texto-secundario); margin-bottom: 1.5rem; }
         
-        .phone-display { flex: 1; max-width: 340px; background-color: #1E2425; border-radius: 40px; border: 12px solid #2A363B; padding: 25px 15px; box-shadow: var(--relieve-externo); color: white; }
+        .phone-display { flex: 1; width: 100%; max-width: 340px; background-color: #1E2425; border-radius: 40px; border: 12px solid #2A363B; padding: 25px 15px; box-shadow: var(--relieve-externo); color: white; margin: 0 auto; }
         .phone-screen-card { background-color: var(--gris-superficie); border-radius: 16px; padding: 15px; margin-bottom: 15px; border: var(--borde-sutil); }
 
         /* --- ASESOR VIRTUAL (CHAT CONTINUO) --- */
@@ -91,30 +99,28 @@
         
         .assistant-header {
             background: linear-gradient(135deg, var(--gris-superficie) 0%, var(--morado-gradiente) 100%);
-            padding: 1.5rem 2rem; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
         .assistant-avatar {
-            width: 55px; height: 55px; background: var(--amarillo-acento); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: var(--negro-fondo);
-            box-shadow: 0 4px 10px rgba(255,203,58,0.4);
+            width: 50px; height: 50px; background: var(--amarillo-acento); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: var(--negro-fondo);
+            box-shadow: 0 4px 10px rgba(255,203,58,0.4); flex-shrink: 0;
         }
 
         .assistant-body { 
-            flex: 1; padding: 2rem; overflow-y: auto; background-color: #171b1c; scroll-behavior: smooth;
+            flex: 1; padding: 1.5rem; overflow-y: auto; background-color: #171b1c; scroll-behavior: smooth;
         }
-        
-        /* Personalizando el scrollbar del chat */
-        .assistant-body::-webkit-scrollbar { width: 8px; }
+
+        .assistant-body::-webkit-scrollbar { width: 6px; }
         .assistant-body::-webkit-scrollbar-track { background: #171b1c; }
         .assistant-body::-webkit-scrollbar-thumb { background: var(--gris-superficie); border-radius: 4px; }
 
-        /* Globos de Chat */
         .chat-bubble {
             background: var(--gris-superficie); padding: 1.2rem; border-radius: 18px;
-            border-bottom-left-radius: 4px; font-size: 1.1rem; color: white;
-            margin-bottom: 1.5rem; max-width: 85%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            animation: fadeInBubble 0.3s ease-out forwards;
+            border-bottom-left-radius: 4px; font-size: 1.05rem; color: white;
+            margin-bottom: 1.2rem; max-width: 85%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: fadeInBubble 0.3s ease-out forwards; word-wrap: break-word;
         }
         
         .chat-bubble.user {
@@ -124,31 +130,28 @@
 
         @keyframes fadeInBubble { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Botones de Opciones dentro del chat */
-        .options-container { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; animation: fadeInBubble 0.3s ease-out forwards; }
+        .options-container { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; animation: fadeInBubble 0.3s ease-out forwards; width: 100%; }
         
         .category-btn, .question-btn {
-            display: block; width: 100%; max-width: 90%; text-align: left; padding: 1.2rem;
+            display: block; width: 100%; text-align: left; padding: 1rem;
             background: var(--negro-fondo); color: white; border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; font-size: 1.05rem; cursor: pointer; transition: all 0.2s; font-weight: 500;
+            border-radius: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; font-weight: 500;
         }
         .category-btn:hover, .question-btn:hover { background: rgba(255,255,255,0.05); border-color: var(--amarillo-acento); transform: translateX(5px); }
         .category-btn i { color: var(--amarillo-acento); margin-right: 12px; font-size: 1.2rem; width: 25px; text-align: center; }
 
         .back-btn {
             background: transparent; border: none; color: var(--amarillo-acento);
-            cursor: pointer; font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: color 0.2s; padding: 10px 0;
+            cursor: pointer; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 8px; transition: color 0.2s; padding: 10px 0;
         }
         .back-btn:hover { color: white; }
 
-        /* Animación de "escribiendo" realista */
         .typing { display: flex; gap: 5px; padding: 5px; }
         .typing span { width: 8px; height: 8px; background: var(--texto-secundario); border-radius: 50%; animation: blink 1.4s infinite both; }
         .typing span:nth-child(2) { animation-delay: 0.2s; }
         .typing span:nth-child(3) { animation-delay: 0.4s; }
         @keyframes blink { 0% { opacity: 0.2; } 20% { opacity: 1; } 100% { opacity: 0.2; } }
 
-        /* Animación de Pulso de Alerta en menú */
         @keyframes pulseAlert {
             0% { box-shadow: 0 0 0 0 rgba(255, 79, 97, 0.7); }
             70% { box-shadow: 0 0 0 20px rgba(255, 79, 97, 0); }
@@ -168,17 +171,70 @@
         }
         .survey-qr {
             width: 200px; height: 200px; background: white; padding: 10px; border-radius: 12px;
-            border: 4px dashed var(--rojo-principal); transition: transform 0.3s;
+            border: 4px dashed var(--rojo-principal); transition: transform 0.3s; margin: 0 auto;
         }
         .survey-qr:hover { transform: scale(1.05); border-style: solid; }
 
+        /* ==========================================================================
+           RESPONSIVIDAD MÓVIL (MEDIA QUERIES)
+           ========================================================================== */
         @media (max-width: 968px) {
-            .split-layout, .split-layout:nth-child(even), .survey-layout { flex-direction: column; text-align: center; }
-            .hero-banner h1 { font-size: 2.5rem; }
-            nav { display: none; }
-            .phone-display { margin: 0 auto; }
-            .chat-bubble { max-width: 95%; }
-            .category-btn, .question-btn { max-width: 100%; }
+            
+            /* Ajustes Generales y de Contenedores */
+            .container-wrapper { padding: 3rem 5%; }
+            .split-layout, .split-layout:nth-child(even), .survey-layout { 
+                flex-direction: column; text-align: center; gap: 2rem; 
+            }
+            .survey-layout { padding: 2rem 1.5rem; }
+            .grandpa-guide { padding: 1.8rem; margin-top: 3rem; }
+            
+            /* Ajuste de Textos */
+            .hero-banner { padding: 4rem 5% 3rem; }
+            .hero-banner h1 { font-size: 2.2rem; }
+            .hero-banner p { font-size: 1.1rem; }
+            .split-info h2 { font-size: 1.8rem; }
+            .section-title { font-size: 2rem !important; margin-bottom: 2rem !important;}
+            
+            /* Ajuste del Chat para que quepa bien en pantalla de celular */
+            .virtual-assistant { height: 75vh; min-height: 450px; max-height: 600px; margin-top: 1rem; }
+            .chat-bubble { max-width: 95%; font-size: 0.95rem; padding: 1rem; }
+            
+            /* --- NAVEGACIÓN MÓVIL TIPO APP --- */
+            /* Ocultar el menú superior y botón CTA en la cabecera */
+            .desktop-nav { display: none; }
+            .header-btn { display: none; }
+            header { padding: 1rem 5%; justify-content: center; } /* Centra el logo */
+            
+            /* Habilitar espacio inferior para que el menú no tape contenido */
+            body { padding-bottom: 80px; }
+            footer { padding-bottom: 100px !important; }
+
+            /* Estilos de la barra inferior */
+            .mobile-nav {
+                display: flex; justify-content: space-around; align-items: center;
+                position: fixed; bottom: 0; left: 0; right: 0;
+                background: rgba(30, 36, 37, 0.98); backdrop-filter: blur(15px);
+                padding: 12px 5%; z-index: 2000;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                padding-bottom: calc(12px + env(safe-area-inset-bottom));
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+            }
+            .mobile-nav a {
+                color: var(--texto-secundario); text-decoration: none;
+                display: flex; flex-direction: column; align-items: center; 
+                font-size: 0.70rem; font-weight: 600; gap: 5px; transition: all 0.3s;
+            }
+            .mobile-nav a.active-nav { color: var(--amarillo-acento); transform: translateY(-3px); }
+            .mobile-nav a i { font-size: 1.4rem; }
+            
+            /* Botón resaltado del centro en el menú móvil */
+            .mobile-nav .nav-highlight i {
+                background: linear-gradient(135deg, var(--rojo-principal) 0%, #FF8A70 100%);
+                color: white; padding: 12px; border-radius: 50%;
+                font-size: 1.2rem; transform: translateY(-15px);
+                box-shadow: var(--relieve-boton); border: 3px solid var(--negro-fondo);
+            }
+            .mobile-nav .nav-highlight.active-nav i { border-color: var(--amarillo-acento); }
         }
     </style>
 </head>
@@ -186,24 +242,24 @@
 
     <header>
         <div class="logo" onclick="navigateTo('inicio')"><i class="fa-solid fa-key"></i> HEARTH & KEY</div>
-        <nav>
-            <a id="nav-inicio" class="active-nav" onclick="navigateTo('inicio')">Inicio</a>
-            <a id="nav-ecosistema" onclick="navigateTo('ecosistema')">El Ecosistema</a>
-            <a id="nav-gamificacion" onclick="navigateTo('gamificacion')">Gamificación</a>
-            <a id="nav-soporte" onclick="navigateTo('soporte')">Soporte Virtual</a>
+        <nav class="desktop-nav">
+            <a id="nav-inicio-desk" class="active-nav" onclick="navigateTo('inicio')">Inicio</a>
+            <a id="nav-ecosistema-desk" onclick="navigateTo('ecosistema')">El Ecosistema</a>
+            <a id="nav-gamificacion-desk" onclick="navigateTo('gamificacion')">Gamificación</a>
+            <a id="nav-soporte-desk" onclick="navigateTo('soporte')">Soporte Virtual</a>
         </nav>
-        <button onclick="navigateTo('soporte')" class="btn-cta pulse-btn"><i class="fa-solid fa-headset"></i> Ayuda Uno a Uno</button>
+        <button onclick="navigateTo('soporte')" class="btn-cta pulse-btn header-btn"><i class="fa-solid fa-headset"></i> Ayuda Uno a Uno</button>
     </header>
 
     <div id="inicio" class="page-section active-page">
         <section class="hero-banner">
-            <h1>Educación, Disciplina y <span>Armonía Digital</span></h1>
-            <p>No se trata de quitarle los teléfonos a nuestros nietos e hijos, sino de enseñarles que los privilegios de entretenimiento se ganan con respeto, colaboración y esfuerzo diario en el hogar.</p>
-            <button onclick="navigateTo('ecosistema')" class="btn-cta">Ver Cómo Funciona <i class="fa-solid fa-arrow-right"></i></button>
+            <h1>Educación, Disciplina y <br><span>Armonía Digital</span></h1>
+            <p>No se trata de prohibir la tecnología, sino de enseñarles que los privilegios de entretenimiento se ganan con respeto, colaboración y esfuerzo diario en el hogar.</p>
+            <button onclick="navigateTo('ecosistema')" class="btn-cta" style="margin-top: 15px;">Ver Cómo Funciona <i class="fa-solid fa-arrow-right"></i></button>
         </section>
 
         <div class="container-wrapper">
-            <h2 style="text-align: center; font-size: 2.5rem;">Los Pilares del Proyecto</h2>
+            <h2 style="text-align: center; font-size: 2.5rem;" class="section-title">Los Pilares del Proyecto</h2>
             <div class="grid-cards">
                 <div class="card-3d">
                     <div class="card-icon"><i class="fa-solid fa-house-lock"></i></div>
@@ -231,7 +287,7 @@
 
     <div id="ecosistema" class="page-section">
         <div class="container-wrapper">
-            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 4rem;">El Ecosistema Hearth & Key</h2>
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 4rem;" class="section-title">El Ecosistema Hearth & Key</h2>
 
             <div class="split-layout">
                 <div class="split-info">
@@ -270,7 +326,7 @@
 
     <div id="gamificacion" class="page-section">
         <div class="container-wrapper">
-            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 4rem;">Economía y Premios (Gamificación)</h2>
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 4rem;" class="section-title">Economía y Premios</h2>
 
             <div class="split-layout">
                 <div class="split-info">
@@ -280,7 +336,7 @@
                     <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 10px;">
                         <div style="background-color: var(--gris-superficie); padding: 12px; border-radius: 10px;">🥉 <strong>Bronce:</strong> 10 desafíos logrados.</div>
                         <div style="background-color: var(--gris-superficie); padding: 12px; border-radius: 10px;">🥈 <strong>Plata:</strong> 25 desafíos logrados.</div>
-                        <div style="background-color: var(--gris-superficie); padding: 12px; border-radius: 10px;">🥇 <strong>Oro:</strong> 50 desafíos logrados (Máxima confianza).</div>
+                        <div style="background-color: var(--gris-superficie); padding: 12px; border-radius: 10px;">🥇 <strong>Oro:</strong> 50 desafíos logrados.</div>
                     </div>
                 </div>
                 <div class="phone-display">
@@ -296,15 +352,15 @@
 
     <div id="soporte" class="page-section">
         <div class="container-wrapper">
-            <h2 style="text-align: center; font-size: 2.5rem;">Asesoría Personalizada Uno a Uno</h2>
-            <p style="text-align: center; color: var(--texto-secundario); font-size: 1.1rem; max-width: 700px; margin: 0 auto 3rem;">Sabemos que la tecnología puede generar dudas. Hemos preparado un asistente interactivo especial para guiarle paso a paso con la paciencia que usted merece.</p>
+            <h2 style="text-align: center; font-size: 2.5rem;" class="section-title">Asesoría Personalizada</h2>
+            <p style="text-align: center; color: var(--texto-secundario); font-size: 1.1rem; max-width: 700px; margin: 0 auto 3rem;">Sabemos que la tecnología puede generar dudas. Hemos preparado un asistente interactivo especial para guiarle paso a paso.</p>
 
             <div class="virtual-assistant">
                 <div class="assistant-header">
                     <div class="assistant-avatar"><i class="fa-solid fa-headset"></i></div>
                     <div>
-                        <h3 id="nombre-asesor" style="color: white; font-size: 1.3rem;">Asesoría Hearth & Key</h3>
-                        <p style="color: var(--amarillo-acento); font-size: 0.95rem; font-weight: 600;">En línea - Listo para ayudarle</p>
+                        <h3 id="nombre-asesor" style="color: white; font-size: 1.2rem;">Asesoría en línea</h3>
+                        <p style="color: var(--amarillo-acento); font-size: 0.85rem; font-weight: 600;">En línea - Listo para ayudarle</p>
                     </div>
                 </div>
                 
@@ -312,14 +368,14 @@
                     </div>
             </div>
 
-            <div class="survey-layout" style="margin-top: 5rem;">
+            <div class="survey-layout">
                 <div style="flex: 1;">
-                    <h2 style="color: white; font-weight: 900; margin-bottom: 1rem;">Ayúdenos a mejorar (Estudio)</h2>
+                    <h2 style="color: white; font-weight: 900; margin-bottom: 1rem; font-size: 2rem;">Ayúdenos a mejorar (Estudio)</h2>
                     <p style="color: var(--texto-secundario); font-size: 1.1rem; margin-bottom: 2rem;">
                         Estamos perfeccionando esta aplicación y su opinión es nuestra pieza más importante. Por favor, dedique 2 minutos a contestar nuestro formulario tocando el código o el botón.
                     </p>
-                    <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=UXaQPMbYpkyopGokJDDmUwEqQLv1wUFKiFyHoai7A9VUQTJXR1VDSzM2RzJKUFQyS01ENlo3VVlRMy4u" target="_blank" class="btn-cta">
-                        Contestar Formulario
+                    <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=UXaQPMbYpkyopGokJDDmUwEqQLv1wUFKiFyHoai7A9VUQTJXR1VDSzM2RzJKUFQyS01ENlo3VVlRMy4u" target="_blank" class="btn-cta" style="width: 100%;">
+                        <i class="fa-solid fa-file-signature"></i> Contestar Formulario
                     </a>
                 </div>
                 <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=UXaQPMbYpkyopGokJDDmUwEqQLv1wUFKiFyHoai7A9VUQTJXR1VDSzM2RzJKUFQyS01ENlo3VVlRMy4u" target="_blank" title="Haga clic aquí para ir al formulario">
@@ -336,17 +392,45 @@
         <p>&copy; 2026 Hearth & Key. Tecnología con propósito familiar.</p>
     </footer>
 
+    <nav class="mobile-nav">
+        <a id="nav-inicio-mob" class="active-nav" onclick="navigateTo('inicio')">
+            <i class="fa-solid fa-house"></i>
+            <span>Inicio</span>
+        </a>
+        <a id="nav-ecosistema-mob" onclick="navigateTo('ecosistema')">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <span>Ecosistema</span>
+        </a>
+        
+        <a id="nav-soporte-mob" class="nav-highlight pulse-btn" onclick="navigateTo('soporte')">
+            <i class="fa-solid fa-headset"></i>
+            <span>Ayuda</span>
+        </a>
+        
+        <a id="nav-gamificacion-mob" onclick="navigateTo('gamificacion')">
+            <i class="fa-solid fa-fire"></i>
+            <span>Premios</span>
+        </a>
+    </nav>
+
 
     <script>
         // 1. NAVEGACIÓN ENTRE PÁGINAS (SPA)
         function navigateTo(pageId) {
+            // Ocultar todas las páginas
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-page'));
             document.getElementById(pageId).classList.add('active-page');
             
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-nav'));
-            const navItem = document.getElementById('nav-' + pageId);
-            if(navItem) navItem.classList.add('active-nav');
+            // Quitar clase "active" de TODOS los links (Escritorio y Móvil)
+            document.querySelectorAll('header nav a, .mobile-nav a').forEach(a => a.classList.remove('active-nav'));
             
+            // Asignar clase "active" a los links correspondientes
+            const navDesk = document.getElementById('nav-' + pageId + '-desk');
+            const navMob = document.getElementById('nav-' + pageId + '-mob');
+            if(navDesk) navDesk.classList.add('active-nav');
+            if(navMob) navMob.classList.add('active-nav');
+            
+            // Regresar el scroll arriba
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
@@ -381,23 +465,24 @@
         };
 
         // 3. LÓGICA DEL ASISTENTE VIRTUAL (CHAT CONTINUO)
-        
-        // Nombres del equipo rotativos
         const nombresEquipo = ['Villar', 'Ariana', 'Estephany', 'Elayne', 'Alejandro'];
         const asesorActual = nombresEquipo[Math.floor(Math.random() * nombresEquipo.length)];
         const chatBody = document.getElementById('chat-body');
 
-        // Inicializar el chat al cargar la página
         window.onload = () => {
             document.getElementById('nombre-asesor').innerText = 'Asesor(a) ' + asesorActual;
             iniciarChat();
         };
 
         function scrollBottom() {
-            chatBody.scrollTop = chatBody.scrollHeight;
+            setTimeout(() => {
+                chatBody.scrollTo({
+                    top: chatBody.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 50);
         }
 
-        // Agregar globo de texto del bot
         function addBotMessage(text) {
             const div = document.createElement('div');
             div.className = 'chat-bubble';
@@ -406,7 +491,6 @@
             scrollBottom();
         }
 
-        // Agregar globo de texto del usuario (rojo y a la derecha)
         function addUserMessage(text) {
             const div = document.createElement('div');
             div.className = 'chat-bubble user';
@@ -415,7 +499,6 @@
             scrollBottom();
         }
 
-        // Mostrar animación de escribiendo...
         function showTyping() {
             const div = document.createElement('div');
             div.className = 'chat-bubble typing-bubble';
@@ -425,13 +508,11 @@
             scrollBottom();
         }
 
-        // Eliminar animación de escribiendo
         function removeTyping() {
             const typingEl = document.getElementById('current-typing');
             if (typingEl) typingEl.remove();
         }
 
-        // Mostrar botones de las Categorías Principales
         function showCategories(mensajePrevio = null) {
             if (mensajePrevio) addBotMessage(mensajePrevio);
             
@@ -446,15 +527,11 @@
             scrollBottom();
         }
 
-        // Acción: Usuario eligió una Categoría
         window.selectCategory = function(catId, catName) {
-            // Eliminar opciones para que el chat quede limpio
             removeActiveOptions();
-            
             addUserMessage("Me interesa saber sobre: <strong>" + catName + "</strong>");
             showTyping();
             
-            // Simular respuesta rápida para mostrar sub-preguntas (1 segundo)
             setTimeout(() => {
                 removeTyping();
                 addBotMessage("¡Perfecto! Aquí tengo las dudas más comunes sobre ese tema. Seleccione la pregunta exacta que tiene en mente:");
@@ -462,7 +539,6 @@
             }, 1000);
         }
 
-        // Mostrar botones de Preguntas Específicas
         function showQuestions(catId) {
             const container = document.createElement('div');
             container.className = 'options-container';
@@ -488,34 +564,29 @@
             scrollBottom();
         }
 
-        // Acción: Usuario eligió una Pregunta Exacta
         window.selectQuestion = function(pregunta, respuesta) {
             removeActiveOptions();
             addUserMessage(pregunta);
             
-            // Simular que el asesor está pensando/escribiendo durante 2 SEGUNDOS
             showTyping();
             setTimeout(() => {
                 removeTyping();
-                addBotMessage(respuesta); // Muestra la respuesta
+                addBotMessage(respuesta); 
                 
-                // Mostrar automáticamente el menú principal de nuevo después de 1 segundo de leer
                 setTimeout(() => {
                     showCategories("¿Le puedo ayudar a resolver alguna otra duda?");
                 }, 1500);
                 
-            }, 2000); // <-- 2000ms = 2 Segundos de espera
+            }, 2000); 
         }
 
-        // Utilidad: quitar botones viejos para que el historial quede como texto
         function removeActiveOptions() {
             const opts = document.querySelectorAll('.options-container');
             opts.forEach(opt => opt.remove());
         }
 
-        // Arrancar el flujo inicial
         function iniciarChat() {
-            chatBody.innerHTML = ''; // Limpiar chat
+            chatBody.innerHTML = ''; 
             addBotMessage(`¡Hola! Qué gusto saludarle. Soy su asesor personal <strong>${asesorActual}</strong>. He organizado las respuestas a sus dudas en 3 grandes áreas. ¿En cuál le gustaría que le apoye hoy?`);
             showCategories();
         }
